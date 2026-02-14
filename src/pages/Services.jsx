@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { API_URL } from '../config';
 import * as FaIcons from 'react-icons/fa';
 import '../styles/global.css';
 
@@ -15,7 +16,7 @@ const Services = () => {
                 // Use a relative URL which works if a proxy is set up or if the backend is on the same origin (production)
                 // For dev, if proxy is not set in package.json, we might need the full URL or a proxy.
                 // Assuming proxy or CORS is handled. Let's use the full URL for safety in dev as seen in Admin pages.
-                const res = await axios.get('http://localhost:5000/api/services');
+                const res = await axios.get(`${API_URL}/services`);
                 setServices(res.data);
                 setLoading(false);
             } catch (err) {

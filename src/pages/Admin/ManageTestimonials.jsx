@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../config';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import '../../styles/global.css';
 
@@ -27,7 +28,7 @@ const ManageTestimonials = () => {
 
     const fetchTestimonials = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/testimonials');
+            const res = await axios.get(`${API_URL}/testimonials`);
             setTestimonials(res.data);
         } catch (err) {
             console.error(err);
@@ -40,9 +41,9 @@ const ManageTestimonials = () => {
         e.preventDefault();
         try {
             if (isEditing) {
-                await axios.put(`http://localhost:5000/api/testimonials/${currentId}`, formData, config);
+                await axios.put(`${API_URL}/testimonials/${currentId}`, formData, config);
             } else {
-                await axios.post('http://localhost:5000/api/testimonials', formData, config);
+                await axios.post(`${API_URL}/testimonials`, formData, config);
             }
             clearForm();
             fetchTestimonials();
@@ -54,7 +55,7 @@ const ManageTestimonials = () => {
     const onDelete = async id => {
         if (window.confirm('Are you sure?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/testimonials/${id}`, config);
+                await axios.delete(`${API_URL}/testimonials/${id}`, config);
                 fetchTestimonials();
             } catch (err) {
                 console.error(err);

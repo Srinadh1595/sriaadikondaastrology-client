@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { FaTimes } from 'react-icons/fa';
 import axios from 'axios';
+import { API_URL } from '../config';
 import '../styles/global.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -16,7 +17,7 @@ const Gallery = () => {
     useEffect(() => {
         const fetchGallery = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/gallery');
+                const res = await axios.get(`${API_URL}/gallery`);
                 setGalleryImages(res.data);
                 setLoading(false);
             } catch (err) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../config';
 import { FaTrash } from 'react-icons/fa';
 import '../../styles/global.css';
 
@@ -23,7 +24,7 @@ const ManageGallery = () => {
 
     const fetchGallery = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/gallery');
+            const res = await axios.get(`${API_URL}/gallery`);
             setGalleryItems(res.data);
         } catch (err) {
             console.error(err);
@@ -35,7 +36,7 @@ const ManageGallery = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/gallery', formData, config);
+            await axios.post(`${API_URL}/gallery`, formData, config);
             setFormData({ image: '', caption: '' });
             fetchGallery();
         } catch (err) {
@@ -46,7 +47,7 @@ const ManageGallery = () => {
     const onDelete = async id => {
         if (window.confirm('Are you sure?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/gallery/${id}`, config);
+                await axios.delete(`${API_URL}/gallery/${id}`, config);
                 fetchGallery();
             } catch (err) {
                 console.error(err);

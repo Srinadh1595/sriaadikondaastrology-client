@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../../config';
 import '../../styles/global.css';
 
 const Login = () => {
@@ -26,7 +27,7 @@ const Login = () => {
         e.preventDefault();
         try {
             // In a real scenario, this URL should be dynamic based on environment
-            const res = await axios.post('http://localhost:5000/api/auth', formData);
+            const res = await axios.post(`${API_URL}/auth`, formData);
             localStorage.setItem('token', res.data.token);
             setIsAuthenticated(true);
         } catch (err) {

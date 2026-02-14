@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import axios from 'axios';
+import { API_URL } from '../config';
 import { FaStar, FaQuoteLeft } from 'react-icons/fa';
 import '../styles/global.css';
 import "slick-carousel/slick/slick.css";
@@ -13,7 +14,7 @@ const Testimonials = () => {
     useEffect(() => {
         const fetchTestimonials = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/testimonials');
+                const res = await axios.get(`${API_URL}/testimonials`);
                 setTestimonials(res.data);
                 setLoading(false);
             } catch (err) {

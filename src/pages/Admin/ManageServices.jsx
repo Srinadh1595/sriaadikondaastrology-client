@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../config';
 import { FaTrash, FaEdit, FaPlus } from 'react-icons/fa';
 import '../../styles/global.css';
 
@@ -27,7 +28,7 @@ const ManageServices = () => {
 
     const fetchServices = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/services');
+            const res = await axios.get(`${API_URL}/services`);
             setServices(res.data);
         } catch (err) {
             console.error(err);
@@ -40,9 +41,9 @@ const ManageServices = () => {
         e.preventDefault();
         try {
             if (isEditing) {
-                await axios.put(`http://localhost:5000/api/services/${currentId}`, formData, config);
+                await axios.put(`${API_URL}/services/${currentId}`, formData, config);
             } else {
-                await axios.post('http://localhost:5000/api/services', formData, config);
+                await axios.post(`${API_URL}/services`, formData, config);
             }
             clearForm();
             fetchServices();
@@ -54,7 +55,7 @@ const ManageServices = () => {
     const onDelete = async id => {
         if (window.confirm('Are you sure?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/services/${id}`, config);
+                await axios.delete(`${API_URL}/services/${id}`, config);
                 fetchServices();
             } catch (err) {
                 console.error(err);
